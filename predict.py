@@ -6,12 +6,13 @@ import PIL as pillow
 from PIL import Image
 
 
+# This program makes predictions of images based on created model
+# The goal is not to make this model very accurate, that's ok.
+# The goal is to test performance time.
+# "time python3 predict.py"
+
 # Load the saved model
-print()
 print("predict.py")
-print("tensorflow version: " + tf.__version__)
-print("pillow version: " + pillow.__version__)
-print("numpy version: " + np.__version__)
 print("-------------------------------------")
 model = keras.models.load_model('my_model.h5')
 
@@ -36,14 +37,11 @@ for filename in os.listdir('images'):
 
     numWord = filename.split('_')[1]
     numWord = numWord.split('.')[0]
-    # numWord is the  
 
-
-
-    #print(numWord)
     print(filename)
-    print(numWord)
-    print(top3_indices[0])
+    print("Target number: " + numWord)
+    print(f"Predicted number: {top3_indices[0]}")
+    print('--------------------------------')
 
 
     if int(top3_indices[0]) == int(numWord):
@@ -72,8 +70,11 @@ w_avg = w_avg/(len(wrong_percents))
 print("Total number of images: " + str(total))
 print("Number of correct predictions: " + str(len(cor_percents)))
 print("Number of wrong predictions: " + str(len(wrong_percents)))
-print(f"Average confidence correct predictions: {c_avg:.4f}")
-print(f"Average confidence wrong predictions: {w_avg:.4f}")
-
+print(f"Average confidence for correct predictions: {c_avg:.4f}")
+print(f"Average confidence for wrong predictions: {w_avg:.4f}")
+print()
+print("tensorflow version: " + tf.__version__)
+print("pillow version: " + pillow.__version__)
+print("numpy version: " + np.__version__)
 
 
